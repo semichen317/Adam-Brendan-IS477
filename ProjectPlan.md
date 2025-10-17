@@ -7,9 +7,11 @@ For our project, our goal is to track weather data and bike usage to determine w
 How sensitive is hourly bike demand to weather in the Chicago metropolitan area from May 2024 to May 2025?
 
 ## **Team members**
-Adam Chen- 
+Adam Chen- Will responsible for Module 1, 7, 8, 9, 
 
-Brendan Speckmann-
+Brendan Speckmann- Will responsible for Module 2, 6, 11, 12
+
+For the rest of the modules we will work together.
 
 ## **Datasets**
 https://www.ncei.noaa.gov/support/access-data-service-api-user-documentation  
@@ -32,29 +34,29 @@ The data collected for the weather dataset will use an API and will be requested
 The organization of this data will be a structured, tabular dataframe. 
 
 ### *Extraction and enrichment (cf. Module 6):Week 3*
-We will build NOAA + Divvy extractors; add time flags (hour, weekday, rush hour) and basic weather features.
+Implement two extractors: NOAA (hourly weather for Chicago) and Divvy (trip + station status). Standardize a skinny schema (timestamp, station_id/area_id) and add derived features—hour-of-day, peak flags, rolling weather means (1–3h), and lagged precipitation/wind.
 
 ### *Data integration (cf. Module 7-8): Week 3*
-Normalize the dataset to America/Chicago, aggregate Divvy to hourly station/area demand and visualize them.
+Align everything to America/Chicago and round to hourly bins. Resolve station name changes with a surrogate key table. Join weather to stations via nearest-weather-point (≤1 km) or area centroid, then aggregate trips to hourly demand per station and neighborhood.
 
 ### *Data quality (cf. Module 9): Week 3*
 Add checks (ranges, nulls, duplicates, bikes≤capacity) with Great Expectations.
 
 ### *Data cleaning (cf. Module 10): Week 4*
-Impute short gaps (FFILL/nearest station), cap outliers, drop inactive/invalid stations.
+Impute short gaps with time interpolation/FFILL (bounded by capacity) and flag imputed cells. Cap extreme demand with IQR/MAD rules, and drop stations with >30% missing hours or <14 active days. Keep a changelog (rows affected, rules applied) for auditability.
 
 ### *Workflow automation and provenance (cf. Module 11-12): Week 4*
 Orchestrate extract to clean with Makefile/Prefect; capture run metadata (commit, params, sources).
 
 ### *Reproducibility and transparency (cf. Module 13): Week 5*
-Pin environment (requirements.txt), publish docs (methods, assumptions, data dictionary) to the repository.
+Pin environment (requirements.txt), publish docs (methods, assumptions, data dictionary) to the repository. With a README, data dictionary, and methods/assumptions page (limits, bias risks). Add license/citation files and note any API rate-limit constraints.
 
 ### *Metadata and data documentation (cf. Module 15): Week 5*
 Metadata for the weather dataset can be found through the ncei.noaa website. They have extensive searching options to get exactly what we would need. You can download the metadata through JSON or XML file formats. This would be useful at the end of our project to help with reusability. 
 
 
 ## **Constraints**
-There are many possible constraints with our research question. First, there could be missing data in either of the datasets. At this current point, we have yet to merge the datasets, so there could be a lot of potential data cleaning required. Missing data can result in over generalized predictions, however with this current research question I don’t think it will cause big issues. Another possible issue could be the time constraints on the data. divvybikes website has a lot of samples in their data. For our program to run smoothly, we can’t afford to have millions of samples so our time frame has to be short. With a short time frame comes hyper selective data. Only using one year, which is our current plan, could cause some issues. Maybe the 12 months we chose had higher wind, rain, or temperatures recorded than usual. Our predictions may be skewed based on the weather year that Chicago had. Our predictions also cannot be generalized outside of the Chicagoland area, since all of our data was recorded from Chicago.   
+There are many possible constraints with our research question. First, there could be missing data in either of the datasets. At this current point, we have yet to merge the datasets, so there could be a lot of potential data cleaning required. Missing data can result in over generalized predictions, however with this current research question I don’t think it will cause big issues. Another possible issue could be the time constraints on the data. DivvyBikes website has a lot of samples in their data. For our program to run smoothly, we can’t afford to have millions of samples so our time frame has to be short. With a short time frame comes hyper selective data. Only using one year, which is our current plan, could cause some issues. Maybe the 12 months we chose had higher wind, rain, or temperatures recorded than usual. Our predictions may be skewed based on the weather year that Chicago had. Our predictions also cannot be generalized outside of the Chicagoland area, since all of our data was recorded from Chicago.   
 	
 
 ## **Gaps**
