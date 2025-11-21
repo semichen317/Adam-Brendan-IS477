@@ -4,11 +4,11 @@
 We actually have not followed this data lifecycle that closely. This data lifecycle was not the most practical framework for our project. We followed a much more data science focused data lifecycle. One data lifecycle we could use is the Data Science Pipeline / Lifecycle created by our Data Science team here at UIUC. This one is shaped more like a pipeline and less like a cycle, which is better for our start to this project. We collected the data from the Divvy website as a CSV, and the NOAA website as an API. Next we prepared the data in order to be ready for cleaning. Finally, we cleaned the data using pandas. Next we will need to get important statistics, create visualizations, and start automating this workflow to finish the pipeline.
 
 ### Collection and Acquisition: 
-For collection and acquisition, we used the requests and os library to grab the data from the websites
+For the data collection part of our project, we wrote Python scripts to download all the information we needed. We worked with two sources: Divvy for bike trips and NOAA for weather. Both sets of data cover the same time period from May 2024 to May 2025.
 
-Divvy: Downloaded monthly trip datasets (May 2024 – May 2025).
+For the Divvy data, we downloaded the monthly trip files directly from the Divvy public data website. Each month has its own file, so we wrote a short Python script that loops through all the months, downloads each file, and saves it in our raw folder. These files contain every bike trip recorded in Chicago, including the start time, start station, and other details. Since the original files are large, collecting them automatically helped keep the process simple and consistent.
 
-NOAA: Queried the Chicago station for the same date range through the NOAA API.
+For the NOAA weather data, we used the NOAA Global Hourly API. We requested weather records for one Chicago station for the same date range as the Divvy trips. The API returns data in a structured format, and our script saved the results as a CSV file. This allowed us to match each hour of bike activity with the temperature, wind, and rain for that hour.
 
 ### Storage and Organization: 
 For storage and Organization, we still decided to use pandas dataframes as they are super user friendly and quite applicable to our research question. We also decided to organize our github in an easier to use file system. So far, the relevant one has been data. We split the data folder into three subfolders: raw, interim, and processed. We put the raw data from the websites into the raw folder. We used the interim folder to transfer the useful information into the processing step of data. Finally, we took the enriched data and cleaned it, and dropped it into the processed folder. In our initial plan, we had the datasets combined already. We intentionally have not combined the datasets yet, since cleaning them separately is more efficient. Integration will occur in the analysis phase.
