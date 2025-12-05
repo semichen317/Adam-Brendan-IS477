@@ -1,0 +1,1 @@
+Due to licensing, we cannot have the raw divvy zip files accessible. Check the interim folder for slightly processed raw divvy data. The website used to attain that data is also in the divvy_prepare script
