@@ -1,0 +1,22 @@
+This project includes a fully automated Run All script that reproduces the entire data pipeline from raw acquisition to final analysis and visualizations. Running this script allows any user to regenerate all intermediate and cleaned datasets, integrate the sources, build the predictive model, and recreate all figures used in the project.
+The data workflow is split into 4 parts:
+1. Data Acquisition of the NOAA and Divvy datasets
+2. Data Cleaning and preprocessing
+3. Data integration for analysis
+4. Analysis and Visualization
+
+The run all script is structured in this order:
+python scripts/prepare/noaa_prepare.py
+python scripts/prepare/divvy_prepare.py
+python scripts/cleaned/cleaned_noaa.py
+python scripts/cleaned/cleaned_divvy.py
+python scripts/integrated/integrated_script.py
+python scripts/analysis/analysis.py
+
+To reproduce workflow:
+1. Download or clone the repository
+2. Make sure system dependencies is the same
+3. Run the workflow script
+
+Output locations:
+The data is stored in the data folder. Acquisition and raw data is in the prepare folder (some raw data not available due to licensing). Cleaned data is in the cleaned folder. The integrated dataset is in the integrated folder. Visualizations are in the figures folder
