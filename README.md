@@ -93,4 +93,20 @@ To reproduce workflow:
 Output locations:
 The data is stored in the data folder. Acquisition and raw data is in the prepare folder (some raw data not available due to licensing). Cleaned data is in the cleaned folder. The integrated dataset is in the integrated folder. Visualizations are in the figures folder.
 
+## Future Work
+In this section we will look at my models performance from a heuristic approach to determine if it should be used in the real world or not.
+
+We learned a few lessons while working with this dataset. First of all, working with a lot of samples is challenging. It slows down production and creates tough decisions on what to use and what to leave out. It was hard to train the model and tune hyperparameters because the train time would always take around 3 minutes. We also learned that an open data license and public domain license is very nice to work with. Not many restrictions, and accessing the data was easy since the datasets were already in a ready-to-use format. 
+
+### Benefits of the model
+Our model has a few benefits. First, it is incredibly timely as mentioned above. Our data is from within two years, making predictions relatively accurate since our data is current. I also think our model is excellent at accomplishing our research task. Our research task was all about bike and weather data in Chicago. Our datasets were both set in Chicago, so you could actually use the predictions in the real world since we are not extrapolating to other cities. A final benefit to our model is that it is simple and very interpretobale. We have only 7 features and one predictor. All the columns are also easy to understand from a non-technical perspective. Finally, our predictions are easy to explain to a representative from a company. We could easily pitch this model to a company and they would understand what it's task and findings would do for them.
+
+### Limitations of the model
+Our model does come with limitations. Adjusting the model takes some time since we have so many samples in our dataset. So if we want better performance or the model stopped performing up to standards, it would take a bit of time to adjust it. Besides that, I don't think there are too many limitations to this model. 
+
+### Risks of the model
+Our mdoel could be risky for the Divvy Bike company. The RMSE is low, but not low enough that there will be no bad predictions. Underestimating the amount of trips people take could really hurt the companies profits if they followed our model but don't have enough bikes out in the streets. This would fall onto us as our model wouldn't be accurate enough for them to sustain a healthy business. Another risk is the possibility of weather swings. While this isn't our model's fault, weather swings could either make it so that the company doesn't have enough bikes for trips, or that their bikes get damaged by bad weather. I don't think this would hurt our conceptually idea of the model, but it is something to look into to improve the model performance and company satisfaction. 
+
+### Improvements to our model
+I think there are many improvements for this model, specifically some are tied to the risks mentioned above. First, the model could actually just improve its RMSE value. I used 200 estimators because of the dataset size and train time. Realistically, this number could probably be higher to learn the patternd of the data better without overfitting. Setting the max_depth parameter so that the trees don't get too big would help the train time if we increased the number of trees used. Secondly, we could use a different model based on company needs. If the company was really afraid of underestimating the number of bikes needed on the streets, we could implement a bias term to help increase the predicted number of trips on average.
 
