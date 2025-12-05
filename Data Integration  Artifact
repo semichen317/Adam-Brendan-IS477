@@ -1,0 +1,7 @@
+Data Integration script:
+1. Loads the cleaned NOAA and Divvy data
+2. Merges the two datasets on the hour variable, using a left merge on the divvy dataframe
+3. Created a CSV of the integrated dataset ready for analysis
+
+Structure of the final merged dataset:
+start_station_id, hour, trips, temp_c, wind_ms, precip_mm
