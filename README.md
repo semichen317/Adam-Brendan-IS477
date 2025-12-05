@@ -35,10 +35,62 @@ Data Cleaning steps for the NOAA Weather data:
 5. For precipitation, the script takes in the accumaltion of all rain water into one hour and converts it into milimeters
 6. The cleaning script also takes the Date variable and converts it into pandas datetime variable, and floors the minutes so that the hours are uniform.
 7. The script get's rid of exact duplicate hours samples, and converts all missing data into numpy's NaN
-8. Finally, the script only keeps the variables hour, temp, wind speed, and precipation and saves it as a CSV. 
+8. Finally, the script only keeps the variables hour, temp, wind speed, and precipation and saves it as a CSV.
 
 Data Cleaning steps for the Divvy Bike data:
 1. Checks for missing start_station_id's and ensures the datatype is a string
 2. Makes sure hour is a numpy datetime and trips is numeric
 3. Removes rows where trips is missing
 4. Sorts rows by station_id and hour, and converts this cleaned dataframe to a CSV
+
+## Findings, Visualizations, Workflow Automation
+Our whole goal for this research question was how does weather and time of year effect bike rental usage. If put into affect, this model could be used by Divvy Bikes to see when their bikes are used most and least frequently. Then, we could predict future number of trips based off of the weather and the season. After finding our datasets and preparing, cleaning, and integrating the datasets, it was finally time to start analyzing. 
+
+For some summary statistics, there were 1,266,795 rows in the dataset. For the years we looked at the data, the average bike trips per hour were 2.67, with a standard deviation of 3.09. That is a lot of data, and training that data would take too long. So I decided to sample half the data. This drastically improved train time for our model while still able to make generally accurate predictions. This is due to the fact that our data is taken every hour. In theory sampling half the data removes 1 out of every two hours. But the temperature, wind, and precipitation don't change that drastically per hour, so our predictions would be relatively safe from random variance by sampling. 
+
+For the model, I decided to use a RandomForestRegressor from the scikit-learn ensemble library with 200 trees. 200 trees is double the standard paramter number of 100. This is due to the fact that we have around 600,000 samples, and more trees would help learn the pattern of the data. I got an RMSE of 2.11. Based off of the standard deviation of 3.09 and a baseline RMSE with no analysis of 3.06, this is about a 33% increase in performance, which is solid. 
+
+For visualizations. I decided to use two: a correlation heat map and a actual vs. predicted scatter plot. For the correlation heat map, it looked at the correlation between temperature, wind speed, precipitation, and trips. The goal was to see which weather patter, if any, had the most effect on number of trips. Looking at the graph, wind speed and precipation had almost no effect, while temperature had a slight correlation. This makes sense, since high wind speeds and precipation are rare in the dataset, so the amount of trips wouldn't be effected as much overall. But temperature swings a lot, so it is easier to capture a relationship between temperature and trips. For the actual vs. predicted scatter plot, we can see that the our model performed well. If the model overfit to the data, we would see much more variance in the graph. If the model was biased in any way, we would see a curve. By looking at the data, it seems well dispersed, and not too variable based on how many samples we had. 
+
+Data Analysis Script:
+1. Reads the integrated dataset from the interim data folder
+2. Preproccesses the data by: 
+3. Dropping any row with NaN values
+4. Encodes categorical variable start_station_id
+5. Adjusts hour to datetime data type
+6. Splits hour into 3 different numeric columns of hour_of_day, day_of_week, month
+7. Drops the original hour and start_station_id variables for testing
+8. Samples 50% of the original data since dataframe is too big for analysis
+9. Splits the data further into 80% of the sample data as training data, and 20% as testing
+10. Fit a RandomForestRegressor from scikit learns ensemble library
+11. Used Root Mean Squared Error to see model performance
+
+Data Visualization Script:
+Created a Correlation Heatmap using the seaborn module. Checks which weather types are more correlated to the amount of trips taken during that hour. 
+Created a Scatter Plot from the Matplotlib.pyplot module for actual trips vs predicted trips. Shows if the model is biased and the variance between actual and predicted trip values.
+
+Workflow Automation Script:
+This project includes a fully automated Run All script that reproduces the entire data pipeline from raw acquisition to final analysis and visualizations. Running this script allows any user to regenerate all intermediate and cleaned datasets, integrate the sources, build the predictive model, and recreate all figures used in the project.
+The data workflow is split into 4 parts:
+1. Data Acquisition of the NOAA and Divvy datasets
+2. Data Cleaning and preprocessing
+3. Data integration for analysis
+4. Analysis and Visualization
+
+The run all script is structured in this order:
+python scripts/prepare/noaa_prepare.py
+python scripts/prepare/divvy_prepare.py
+python scripts/cleaned/cleaned_noaa.py
+python scripts/cleaned/cleaned_divvy.py
+python scripts/integrated/integrated_script.py
+python scripts/analysis/analysis.py
+
+To reproduce workflow:
+1. Download or clone the repository
+2. Make sure system dependencies is the same
+3. Run the workflow script
+
+Output locations:
+The data is stored in the data folder. Acquisition and raw data is in the prepare folder (some raw data not available due to licensing). Cleaned data is in the cleaned folder. The integrated dataset is in the integrated folder. Visualizations are in the figures folder.
+
+
