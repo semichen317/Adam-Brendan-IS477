@@ -1,1 +1,4 @@
-# How Weather Changes and Time of Year in Chicago affect Bike Rental Usage
+# How Weather Changes and Time of Year in Chicago affect Bike Rental Usage 
+### Contributors 
+* Brendan Speckmann 
+* Adam Chen 
