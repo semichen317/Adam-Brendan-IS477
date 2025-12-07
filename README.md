@@ -1,7 +1,10 @@
 # How Weather Changes and Time of Year in Chicago affect Bike Rental Usage 
-### Contributors 
+## Contributors 
 * Brendan Speckmann 
 * Adam Chen
+
+## Data Profile
+Developing-Adam
 
 ## Data Quality 
 Data quality is super important for these two datasets. For the NOAA dataset, they use their own units for temperature, wind speed, and precipation. So we have to make sure that we are adjusting their units to benefit our needs. Secondly, missing values or inconsistent values are plausible when looking at weather data tracked in real time. Making sure these are dealt with helps make our analysis more accurate. For the Divvy dataset, we had to check to make sure there are no missing values or inconsistent values so that we can more accurately predict number of trips based on the weather. For both datasets, making sure that hour was properly formatted for our merge is important so that we don't accidentally have duplicate data points. 
@@ -66,8 +69,7 @@ Data Analysis Script:
 11. Used Root Mean Squared Error to see model performance
 
 Data Visualization Script:
-Created a Correlation Heatmap using the seaborn module. Checks which weather types are more correlated to the amount of trips taken during that hour. 
-Created a Scatter Plot from the Matplotlib.pyplot module for actual trips vs predicted trips. Shows if the model is biased and the variance between actual and predicted trip values.
+Created a Correlation Heatmap using the seaborn module. Checks which weather types are more correlated to the amount of trips taken during that hour. Created a Scatter Plot from the Matplotlib.pyplot module for actual trips vs predicted trips. Shows if the model is biased and the variance between actual and predicted trip values.
 
 Workflow Automation Script:
 This project includes a fully automated Run All script that reproduces the entire data pipeline from raw acquisition to final analysis and visualizations. Running this script allows any user to regenerate all intermediate and cleaned datasets, integrate the sources, build the predictive model, and recreate all figures used in the project.
@@ -79,12 +81,19 @@ The data workflow is split into 4 parts:
 
 The run all script is structured in this order:
 python scripts/prepare/noaa_prepare.py
+
 python scripts/prepare/divvy_prepare.py
+
 python scripts/cleaned/cleaned_noaa.py
+
 python scripts/cleaned/cleaned_divvy.py
+
 python scripts/integrated/integrated_script.py
+
 python scripts/analysis/analysis.py
 
+## Reproducing
+Developing-Adam
 To reproduce workflow:
 1. Download or clone the repository
 2. Make sure system dependencies is the same
@@ -110,3 +119,5 @@ Our mdoel could be risky for the Divvy Bike company. The RMSE is low, but not lo
 ### Improvements to our model
 I think there are many improvements for this model, specifically some are tied to the risks mentioned above. First, the model could actually just improve its RMSE value. I used 200 estimators because of the dataset size and train time. Realistically, this number could probably be higher to learn the patternd of the data better without overfitting. Setting the max_depth parameter so that the trees don't get too big would help the train time if we increased the number of trees used. Secondly, we could use a different model based on company needs. If the company was really afraid of underestimating the number of bikes needed on the streets, we could implement a bias term to help increase the predicted number of trips on average.
 
+## References
+Developing-Adam
