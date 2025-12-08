@@ -120,4 +120,6 @@ Our mdoel could be risky for the Divvy Bike company. The RMSE is low, but not lo
 I think there are many improvements for this model, specifically some are tied to the risks mentioned above. First, the model could actually just improve its RMSE value. I used 200 estimators because of the dataset size and train time. Realistically, this number could probably be higher to learn the patternd of the data better without overfitting. Setting the max_depth parameter so that the trees don't get too big would help the train time if we increased the number of trees used. Secondly, we could use a different model based on company needs. If the company was really afraid of underestimating the number of bikes needed on the streets, we could implement a bias term to help increase the predicted number of trips on average.
 
 ## References
-Developing-Adam
+Divvy. (2024, June 26). *Divvy-tripdata. Divvy-Tripdata.* s3.Amazonaws.com. https://divvy-tripdata.s3.amazonaws.com/index.html
+
+*NCEI Data Service API User Documentation.* (2017, June 20). National Centers for Environmental Information (NCEI). https://www.ncei.noaa.gov/support/access-data-service-api-user-documentation
