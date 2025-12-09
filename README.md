@@ -133,7 +133,7 @@ Run: pip install -r requirements.txt to install the tools we used. This makes su
 
 ### Step 3: Run everything with one command
 
-To reproduce the full workflow, simply run: python run_all.py
+To reproduce the full workflow, simply run: scripts/python run_all.py
 
 This script will download the Divvy and NOAA data, clean both datasets, merge them into one file, and then run all of our analysis steps. It will also generate the final plots and tables in the output folder.
 
