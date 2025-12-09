@@ -4,7 +4,20 @@
 * Adam Chen
 
 ## Data Profile
-Developing-Adam
+
+### Divvy
+The Divvy dataset is our main source for shared bike activities in Chicago. For this project, we used time range from May 2024 through May 2025. Divvy publishes monthly trip files on its website, which are open to everyone. After putting everything together, the dataset had well over one million rows. 
+
+For its content, each trip record includes ride started time, ride ended time, and which stations were used. It also tells us the latitude and longitude of each station and whether the rider is a member or a casual user. The start time was the most important field for us, because it allowed us to group rides by hour. Once we counted trips for every station in every hour, we could compare bike demand to the weather at that same time.
+
+For ethical and legal constraints. Divvy datasets does not include any personal or sensitive data about riders. There are no names, home addresses, phone numbers, or anything that could be used to identify someone. Everything is at the trip level or station level. Because of that we did not have to deal with privacy concerns, and our analysis stays within an acceptable ethical boundary. Divvy makes these files public specifically for research and public use, so using them for a class project is allowed. However, the data should not be used to guess personal travel patterns or anything that targets individuals. Our project only looks at overall trends and hourly demand, so we remained within the intended use of the dataset.
+
+### NOAA
+The second dataset we used for this project was from the NOAA Global Hourly system. NOAA collects weather information from stations across the country. We chose one station (ORD) located in the Chicago area and downloaded weather data for the same date range as the Divvy data. We used the NOAA API to get the files. 
+
+About its content, the dataset includes temperature, wind speed, rain measurements, pressure, and more. Some fields are stored in coded formats, so we had to clean them. For example, temperature values are given in tenths of a degree Celsius, so a number like “0134” means 13.4°C. Wind speed is also coded inside a string of numbers. We converted these into normal numeric values so we could actually use them. We also made sure that every row represented one hour, because we wanted it to match the hourly bike counts from Divvy.
+
+For ethical and legal constraints, NOAA weather data is very easy to work with. It is public domain information, meaning anyone can use it without restrictions. It does not contain any personal data, and all the readings come from automated weather stations. The only real rule is that users should not overload the API with nonstop requests. Our project only needed a small number of calls, so we followed the guidelines without any issues.
 
 ## Data Quality 
 Data quality is super important for these two datasets. For the NOAA dataset, they use their own units for temperature, wind speed, and precipation. So we have to make sure that we are adjusting their units to benefit our needs. Secondly, missing values or inconsistent values are plausible when looking at weather data tracked in real time. Making sure these are dealt with helps make our analysis more accurate. For the Divvy dataset, we had to check to make sure there are no missing values or inconsistent values so that we can more accurately predict number of trips based on the weather. For both datasets, making sure that hour was properly formatted for our merge is important so that we don't accidentally have duplicate data points. 
@@ -93,14 +106,24 @@ python scripts/integrated/integrated_script.py
 python scripts/analysis/analysis.py
 
 ## Reproducing
-Developing-Adam
-To reproduce workflow:
-1. Download or clone the repository
-2. Make sure system dependencies is the same
-3. Run the workflow script
 
-Output locations:
-The data is stored in the data folder. Acquisition and raw data is in the prepare folder (some raw data not available due to licensing). Cleaned data is in the cleaned folder. The integrated dataset is in the integrated folder. Visualizations are in the figures folder.
+### Step 1: Set up the project
+
+Clone the repository and make sure the folder structure stays the same. The folders inside data and output will be filled automatically when the script runs.
+
+### Step 2: Install the required packages
+
+Run: pip install -r requirements.txt to install the tools we used. This makes sure the environment matches ours.
+
+### Step 3: Run everything with one command
+
+To reproduce the full workflow, simply run: python run_all.py
+
+This script will download the Divvy and NOAA data, clean both datasets, merge them into one file, and then run all of our analysis steps. It will also generate the final plots and tables in the output folder.
+
+### Step 5: Check the results
+All results will appear in the data/processed and output folders.
+
 
 ## Future Work
 In this section we will look at my models performance from a heuristic approach to determine if it should be used in the real world or not.
