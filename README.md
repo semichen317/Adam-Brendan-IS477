@@ -1,7 +1,23 @@
-# How Weather Changes and Time of Year in Chicago affect Bike Rental Usage 
+# How Weather Changes and Time of Year in Chicago Affect Share Bike Usage 
 ## Contributors 
 * Brendan Speckmann 
 * Adam Chen
+
+## Summary
+
+Our project was set out to answer How Weather Changes and Time of Year in Chicago Affect Share Bike Usage. The datasets we used were Divvy’s monthly trip data and the National Oceanic and Atmospheric Administration’s (NOAA) hourly weather data. We saw an opportunity to merge these two public datasets and predict hourly ridership data. The goal was not only to attain the results of this analysis but also to construct an automated and reproducible pipeline from data merge to visualization. 
+
+For Divvy datasets, we selected a time range from May 2024 to May 2025 to reflect recent riding habits. We downloaded twelve monthly files from Divvy, which brought the data count to over 1.2 million rows. Each row is a trip, and our research was based on specific start times. This enabled the individual rides to be bundled together as hourly counts. 
+
+NOAA’s Global Hourly weather data was acquired from the O’Hare (ORD) station, selected as a representative geography for the Chicago region. Standard parameters were selected: temperature, wind speed, pressure, and precipitation. The cleansing process was more complex since data was stored in coded formats in some cases. For example, temperature is recorded in tenths of degrees Celsius. It was necessary to convert the columns to metric numeric quantities and then filter the rows to match the Divvy dataset exactly.
+
+Once both datasets were cleaned, we merged them by the hourly timestamp. This created a single dataset which determined the ride counts with weather and time parameters for every single hour of the year. Such a structure was optimal for identifying trends, allowing for direct demand comparisons for warm summer afternoons versus cold winter mornings.
+
+For the modeling part, we chose a Random Forest Regressor. Since the dataset was huge, we sampled 50% of it to keep training times reasonable without sacrificing too much information, using an 80/20 train-test split. The model actually performed pretty well. The baseline standard deviation for hourly trips is about 3.09, but our model achieved an RMSE of 2.11. That’s roughly a 33% improvement over the baseline, which tells us that weather and time variables definitely explain a significant chunk of the variance in share bike demand.
+
+Visualization of the findings consisted of a correlation heatmap and subsequent actual-predicted scatter plot. The heatmap indicated that temperature is the strongest correlation to ridership. Wind and rain lack stronger correlations, possibly due to fewer instances of extremes weather occurring on an hourly basis. The scatter plot served as a sanity check to ensure that the model was consistent without bias. 
+
+In conclusion, the project was able to show that while weather is not the only determining factor, temperature is a very strong signal for Divvy demand prediction. In addition to the results, it was able to incorporate the entire workflow into a fully automated process. This can be achieved by executing run_all.py to trigger the code for every step from raw data intake to the final visualization.
 
 ## Data Profile
 
