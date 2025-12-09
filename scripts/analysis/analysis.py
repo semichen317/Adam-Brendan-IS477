@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 
 """os.chdir("/Users/brendanspeckmann/Desktop/IS477")"""
 
-df = pd.read_csv("integrated_dataset.csv")
+df = pd.read_csv("integrated_dataset.csv.gz", compression="gzip")
 
 df = df.dropna(axis=0, how="any")
 
