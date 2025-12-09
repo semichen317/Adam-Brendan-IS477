@@ -137,7 +137,7 @@ To reproduce the full workflow, simply run: scripts/python run_all.py
 
 This script will download the Divvy and NOAA data, clean both datasets, merge them into one file, and then run all of our analysis steps. It will also generate the final plots and tables in the output folder.
 
-### Step 5: Check the results
+### Step 4: Check the results
 All results will appear in the data/processed and output folders.
 
 
