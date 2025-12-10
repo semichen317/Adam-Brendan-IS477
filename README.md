@@ -123,6 +123,9 @@ python scripts/analysis/analysis.py
 
 ## Reproducing
 
+### Before we start
+The full analysis step trains a machine learning model on a large integrated dataset. This process can use a significant amount of memory and CPU. Because of this, we strongly recommend not running the full pipeline inside GitHub Codespaces. Codespaces has limited system resources, and the analysis step may terminate early or fail due to memory constraints.
+
 ### Step 1: Set up the project
 
 Clone the repository and make sure the folder structure stays the same. The folders inside data and output will be filled automatically when the script runs.
@@ -138,7 +141,7 @@ To reproduce the full workflow, simply run: scripts/python run_all.py
 This script will download the Divvy and NOAA data, clean both datasets, merge them into one file, and then run all of our analysis steps. It will also generate the final plots and tables in the output folder.
 
 ### Step 4: Check the results
-All results will appear in the data/processed and output folders.
+All results will appear in the data/processed and figures folders.
 
 
 ## Future Work
